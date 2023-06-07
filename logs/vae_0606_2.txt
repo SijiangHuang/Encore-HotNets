@@ -1,0 +1,186 @@
+nohup: ignoring input
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Linear-1                   [-1, 64]           1,984
+              ReLU-2                   [-1, 64]               0
+            Linear-3                  [-1, 128]           8,320
+              ReLU-4                  [-1, 128]               0
+            Linear-5                  [-1, 256]          33,024
+              ReLU-6                  [-1, 256]               0
+            Linear-7                  [-1, 128]          32,896
+              ReLU-8                  [-1, 128]               0
+            Linear-9                   [-1, 64]           8,256
+             ReLU-10                   [-1, 64]               0
+           Linear-11                   [-1, 32]           2,080
+           Linear-12                   [-1, 32]           2,080
+================================================================
+Total params: 88,640
+Trainable params: 88,640
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.01
+Params size (MB): 0.34
+Estimated Total Size (MB): 0.35
+----------------------------------------------------------------
+encoder: None
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Linear-1                   [-1, 64]           2,112
+              ReLU-2                   [-1, 64]               0
+            Linear-3                  [-1, 128]           8,320
+              ReLU-4                  [-1, 128]               0
+            Linear-5                  [-1, 256]          33,024
+              ReLU-6                  [-1, 256]               0
+            Linear-7                  [-1, 128]          32,896
+              ReLU-8                  [-1, 128]               0
+            Linear-9                   [-1, 64]           8,256
+             ReLU-10                   [-1, 64]               0
+           Linear-11                   [-1, 30]           1,950
+================================================================
+Total params: 86,558
+Trainable params: 86,558
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.01
+Params size (MB): 0.33
+Estimated Total Size (MB): 0.34
+----------------------------------------------------------------
+decoder: None
+epoch=0, loss=5.27e-02, min_loss=5.27e-02, kld=0.16, recon=5.27e-02, size_dis=0.451, mean_size=3443.40, max_size=100110.09(999), time=1.00
+
+5655500, 35791, 3.26e-01, 3.27e-01, 4.22e-01, 7.19e-02, 7.19e-02, 7.20e-02
+
+epoch=10000, loss=7.38e-03, min_loss=7.03e-03, kld=20.56, recon=6.97e-03, size_dis=0.039, mean_size=0.34, max_size=24.75(497), time=60.25
+epoch=20000, loss=5.90e-03, min_loss=5.67e-03, kld=19.44, recon=5.51e-03, size_dis=0.032, mean_size=0.40, max_size=62.64(496), time=112.56
+epoch=30000, loss=5.16e-03, min_loss=4.88e-03, kld=19.12, recon=4.77e-03, size_dis=0.028, mean_size=0.33, max_size=75.60(497), time=164.03
+epoch=40000, loss=4.42e-03, min_loss=4.30e-03, kld=18.44, recon=4.05e-03, size_dis=0.025, mean_size=0.25, max_size=16.93(497), time=215.33
+epoch=50000, loss=4.14e-03, min_loss=3.85e-03, kld=17.52, recon=3.79e-03, size_dis=0.022, mean_size=0.32, max_size=108.84(496), time=266.37
+epoch=60000, loss=3.65e-03, min_loss=3.59e-03, kld=16.43, recon=3.32e-03, size_dis=0.021, mean_size=0.31, max_size=120.35(497), time=316.61
+epoch=70000, loss=3.45e-03, min_loss=3.32e-03, kld=15.59, recon=3.14e-03, size_dis=0.020, mean_size=0.48, max_size=294.40(497), time=369.37
+epoch=80000, loss=3.30e-03, min_loss=3.20e-03, kld=15.70, recon=2.99e-03, size_dis=0.019, mean_size=0.22, max_size=49.62(496), time=419.79
+epoch=90000, loss=2.97e-03, min_loss=2.84e-03, kld=16.29, recon=2.65e-03, size_dis=0.016, mean_size=0.16, max_size=8.08(35), time=470.88
+epoch=100000, loss=2.82e-03, min_loss=2.75e-03, kld=15.92, recon=2.50e-03, size_dis=0.015, mean_size=0.15, max_size=4.31(719), time=521.78
+
+10847, 35791, 2.33e-02, 3.22e-02, 6.25e-02, 3.07e-02, 3.54e-02, 4.40e-02
+
+epoch=110000, loss=2.70e-03, min_loss=2.66e-03, kld=15.83, recon=2.38e-03, size_dis=0.015, mean_size=0.15, max_size=4.11(719), time=582.42
+epoch=120000, loss=2.61e-03, min_loss=2.50e-03, kld=15.89, recon=2.30e-03, size_dis=0.014, mean_size=0.15, max_size=11.05(192), time=634.02
+epoch=130000, loss=2.65e-03, min_loss=2.47e-03, kld=16.37, recon=2.32e-03, size_dis=0.014, mean_size=0.18, max_size=25.85(795), time=684.26
+epoch=140000, loss=2.45e-03, min_loss=2.38e-03, kld=16.22, recon=2.13e-03, size_dis=0.013, mean_size=0.16, max_size=17.73(192), time=733.79
+epoch=150000, loss=2.55e-03, min_loss=2.35e-03, kld=17.84, recon=2.19e-03, size_dis=0.013, mean_size=0.17, max_size=24.17(192), time=786.45
+epoch=160000, loss=2.29e-03, min_loss=2.27e-03, kld=15.90, recon=1.97e-03, size_dis=0.012, mean_size=0.15, max_size=19.78(192), time=837.09
+epoch=170000, loss=2.29e-03, min_loss=2.24e-03, kld=15.88, recon=1.97e-03, size_dis=0.012, mean_size=0.17, max_size=34.65(192), time=887.88
+epoch=180000, loss=2.28e-03, min_loss=2.21e-03, kld=15.94, recon=1.96e-03, size_dis=0.012, mean_size=0.16, max_size=27.96(192), time=938.80
+epoch=190000, loss=2.42e-03, min_loss=2.18e-03, kld=15.91, recon=2.10e-03, size_dis=0.013, mean_size=0.16, max_size=25.61(192), time=990.44
+epoch=200000, loss=2.18e-03, min_loss=2.14e-03, kld=15.55, recon=1.86e-03, size_dis=0.011, mean_size=0.15, max_size=27.43(192), time=1040.61
+
+25093, 35791, 2.25e-02, 3.10e-02, 6.43e-02, 2.64e-02, 3.29e-02, 4.32e-02
+
+epoch=210000, loss=2.19e-03, min_loss=2.12e-03, kld=15.63, recon=1.87e-03, size_dis=0.011, mean_size=0.16, max_size=33.80(192), time=1100.55
+epoch=220000, loss=2.18e-03, min_loss=2.11e-03, kld=15.37, recon=1.88e-03, size_dis=0.011, mean_size=0.16, max_size=32.68(192), time=1151.01
+epoch=230000, loss=2.19e-03, min_loss=2.11e-03, kld=15.40, recon=1.88e-03, size_dis=0.011, mean_size=0.15, max_size=24.04(192), time=1203.61
+epoch=240000, loss=2.61e-03, min_loss=1.98e-03, kld=15.48, recon=2.30e-03, size_dis=0.016, mean_size=0.38, max_size=28.57(307), time=1253.29
+epoch=250000, loss=2.00e-03, min_loss=1.96e-03, kld=15.55, recon=1.69e-03, size_dis=0.010, mean_size=0.15, max_size=27.50(192), time=1303.25
+epoch=260000, loss=1.98e-03, min_loss=1.93e-03, kld=15.46, recon=1.67e-03, size_dis=0.010, mean_size=0.14, max_size=21.66(192), time=1353.87
+epoch=270000, loss=2.10e-03, min_loss=1.92e-03, kld=15.23, recon=1.80e-03, size_dis=0.011, mean_size=0.35, max_size=105.84(497), time=1406.02
+epoch=280000, loss=1.95e-03, min_loss=1.91e-03, kld=15.25, recon=1.65e-03, size_dis=0.010, mean_size=0.15, max_size=29.66(192), time=1457.47
+epoch=290000, loss=1.93e-03, min_loss=1.84e-03, kld=15.37, recon=1.63e-03, size_dis=0.010, mean_size=0.15, max_size=28.97(192), time=1507.30
+epoch=300000, loss=1.91e-03, min_loss=1.88e-03, kld=15.14, recon=1.60e-03, size_dis=0.010, mean_size=0.14, max_size=29.24(192), time=1557.60
+
+17345, 35791, 2.34e-02, 3.30e-02, 7.27e-02, 2.37e-02, 3.10e-02, 4.57e-02
+
+epoch=310000, loss=1.87e-03, min_loss=1.85e-03, kld=15.10, recon=1.57e-03, size_dis=0.009, mean_size=0.14, max_size=27.74(192), time=1616.40
+epoch=320000, loss=1.85e-03, min_loss=1.84e-03, kld=15.19, recon=1.55e-03, size_dis=0.009, mean_size=0.13, max_size=19.49(192), time=1668.58
+epoch=330000, loss=1.92e-03, min_loss=1.83e-03, kld=15.16, recon=1.62e-03, size_dis=0.010, mean_size=0.12, max_size=13.45(192), time=1717.62
+epoch=340000, loss=1.86e-03, min_loss=1.81e-03, kld=14.95, recon=1.56e-03, size_dis=0.009, mean_size=0.13, max_size=25.03(192), time=1768.45
+epoch=350000, loss=1.90e-03, min_loss=1.81e-03, kld=15.09, recon=1.60e-03, size_dis=0.010, mean_size=0.47, max_size=202.55(998), time=1819.77
+epoch=360000, loss=1.90e-03, min_loss=1.84e-03, kld=15.01, recon=1.60e-03, size_dis=0.010, mean_size=0.29, max_size=93.74(994), time=1873.75
+epoch=370000, loss=1.96e-03, min_loss=1.83e-03, kld=14.95, recon=1.66e-03, size_dis=0.010, mean_size=0.24, max_size=115.34(994), time=1925.36
+epoch=380000, loss=1.87e-03, min_loss=1.83e-03, kld=14.81, recon=1.57e-03, size_dis=0.009, mean_size=0.24, max_size=112.65(994), time=1976.80
+epoch=390000, loss=1.83e-03, min_loss=1.78e-03, kld=15.22, recon=1.53e-03, size_dis=0.009, mean_size=0.22, max_size=91.59(994), time=2028.32
+epoch=400000, loss=1.85e-03, min_loss=1.74e-03, kld=15.23, recon=1.54e-03, size_dis=0.009, mean_size=0.16, max_size=28.33(192), time=2081.96
+
+12940, 35791, 2.45e-02, 3.30e-02, 6.23e-02, 2.44e-02, 3.18e-02, 4.49e-02
+
+epoch=410000, loss=1.84e-03, min_loss=1.77e-03, kld=14.92, recon=1.54e-03, size_dis=0.009, mean_size=0.16, max_size=39.71(994), time=2140.19
+epoch=420000, loss=1.81e-03, min_loss=1.77e-03, kld=15.05, recon=1.51e-03, size_dis=0.009, mean_size=0.33, max_size=204.25(994), time=2190.90
+epoch=430000, loss=1.86e-03, min_loss=1.77e-03, kld=15.04, recon=1.55e-03, size_dis=0.009, mean_size=0.16, max_size=31.30(994), time=2242.34
+epoch=440000, loss=1.82e-03, min_loss=1.76e-03, kld=15.00, recon=1.52e-03, size_dis=0.009, mean_size=0.40, max_size=152.06(994), time=2294.33
+epoch=450000, loss=1.77e-03, min_loss=1.73e-03, kld=15.14, recon=1.47e-03, size_dis=0.009, mean_size=0.20, max_size=95.77(994), time=2344.95
+epoch=460000, loss=1.75e-03, min_loss=1.72e-03, kld=15.21, recon=1.45e-03, size_dis=0.009, mean_size=0.13, max_size=21.41(994), time=2394.87
+epoch=470000, loss=1.77e-03, min_loss=1.72e-03, kld=14.88, recon=1.48e-03, size_dis=0.009, mean_size=0.15, max_size=34.36(994), time=2445.53
+epoch=480000, loss=1.80e-03, min_loss=1.71e-03, kld=14.87, recon=1.50e-03, size_dis=0.009, mean_size=0.14, max_size=29.66(994), time=2498.71
+epoch=490000, loss=1.75e-03, min_loss=1.72e-03, kld=14.67, recon=1.46e-03, size_dis=0.009, mean_size=0.13, max_size=24.75(994), time=2548.60
+epoch=500000, loss=1.74e-03, min_loss=1.70e-03, kld=14.76, recon=1.44e-03, size_dis=0.009, mean_size=0.14, max_size=30.96(994), time=2599.19
+
+10696, 35791, 2.39e-02, 3.69e-02, 7.34e-02, 2.33e-02, 2.96e-02, 4.50e-02
+
+epoch=510000, loss=1.70e-03, min_loss=1.69e-03, kld=14.74, recon=1.41e-03, size_dis=0.009, mean_size=0.13, max_size=22.08(994), time=2655.69
+epoch=520000, loss=1.72e-03, min_loss=1.68e-03, kld=14.68, recon=1.42e-03, size_dis=0.009, mean_size=0.14, max_size=26.37(994), time=2707.94
+epoch=530000, loss=1.70e-03, min_loss=1.68e-03, kld=14.54, recon=1.41e-03, size_dis=0.009, mean_size=0.13, max_size=17.83(994), time=2758.52
+epoch=540000, loss=1.71e-03, min_loss=1.67e-03, kld=14.96, recon=1.41e-03, size_dis=0.009, mean_size=0.21, max_size=99.30(994), time=2809.12
+epoch=550000, loss=1.71e-03, min_loss=1.67e-03, kld=15.05, recon=1.41e-03, size_dis=0.008, mean_size=0.12, max_size=19.68(994), time=2860.52
+epoch=560000, loss=1.80e-03, min_loss=1.66e-03, kld=15.42, recon=1.49e-03, size_dis=0.009, mean_size=0.14, max_size=33.08(994), time=2910.44
+epoch=570000, loss=1.69e-03, min_loss=1.65e-03, kld=14.66, recon=1.39e-03, size_dis=0.008, mean_size=0.12, max_size=17.21(994), time=2962.82
+epoch=580000, loss=1.70e-03, min_loss=1.66e-03, kld=15.06, recon=1.40e-03, size_dis=0.008, mean_size=0.19, max_size=81.63(994), time=3013.50
+epoch=590000, loss=1.69e-03, min_loss=1.66e-03, kld=14.64, recon=1.39e-03, size_dis=0.008, mean_size=0.13, max_size=24.08(994), time=3064.29
+epoch=600000, loss=1.73e-03, min_loss=1.65e-03, kld=15.08, recon=1.43e-03, size_dis=0.008, mean_size=0.11, max_size=4.32(996), time=3118.24
+
+10938, 35791, 2.43e-02, 3.35e-02, 6.61e-02, 2.45e-02, 3.02e-02, 4.77e-02
+
+epoch=610000, loss=1.66e-03, min_loss=1.63e-03, kld=14.61, recon=1.37e-03, size_dis=0.008, mean_size=0.10, max_size=5.56(996), time=3178.46
+epoch=620000, loss=1.68e-03, min_loss=1.63e-03, kld=14.82, recon=1.38e-03, size_dis=0.008, mean_size=0.11, max_size=3.15(996), time=3229.11
+epoch=630000, loss=1.68e-03, min_loss=1.63e-03, kld=14.99, recon=1.38e-03, size_dis=0.008, mean_size=0.10, max_size=3.72(996), time=3278.18
+epoch=640000, loss=1.64e-03, min_loss=1.63e-03, kld=14.44, recon=1.35e-03, size_dis=0.008, mean_size=0.10, max_size=3.36(996), time=3330.34
+epoch=650000, loss=1.66e-03, min_loss=1.63e-03, kld=14.67, recon=1.37e-03, size_dis=0.008, mean_size=0.10, max_size=6.30(996), time=3381.64
+epoch=660000, loss=1.66e-03, min_loss=1.62e-03, kld=14.98, recon=1.36e-03, size_dis=0.008, mean_size=0.10, max_size=2.27(996), time=3432.00
+epoch=670000, loss=1.65e-03, min_loss=1.61e-03, kld=14.71, recon=1.35e-03, size_dis=0.008, mean_size=0.10, max_size=3.44(996), time=3482.20
+epoch=680000, loss=1.63e-03, min_loss=1.60e-03, kld=14.52, recon=1.34e-03, size_dis=0.008, mean_size=0.10, max_size=3.02(996), time=3531.23
+epoch=690000, loss=1.62e-03, min_loss=1.59e-03, kld=14.51, recon=1.33e-03, size_dis=0.008, mean_size=0.10, max_size=4.72(996), time=3583.47
+epoch=700000, loss=1.63e-03, min_loss=1.58e-03, kld=14.44, recon=1.34e-03, size_dis=0.008, mean_size=0.10, max_size=2.70(996), time=3632.94
+
+19516, 35791, 2.37e-02, 3.41e-02, 6.61e-02, 2.56e-02, 3.23e-02, 4.95e-02
+
+epoch=710000, loss=1.61e-03, min_loss=1.58e-03, kld=14.44, recon=1.32e-03, size_dis=0.008, mean_size=0.10, max_size=3.60(996), time=3691.40
+epoch=720000, loss=1.61e-03, min_loss=1.58e-03, kld=14.38, recon=1.32e-03, size_dis=0.008, mean_size=0.10, max_size=2.32(996), time=3741.30
+epoch=730000, loss=1.60e-03, min_loss=1.57e-03, kld=14.15, recon=1.31e-03, size_dis=0.008, mean_size=0.11, max_size=5.26(828), time=3794.02
+epoch=740000, loss=1.61e-03, min_loss=1.57e-03, kld=14.17, recon=1.32e-03, size_dis=0.008, mean_size=0.10, max_size=3.88(996), time=3844.46
+epoch=750000, loss=1.60e-03, min_loss=1.57e-03, kld=14.15, recon=1.32e-03, size_dis=0.008, mean_size=0.10, max_size=1.71(720), time=3894.11
+epoch=760000, loss=1.73e-03, min_loss=1.58e-03, kld=14.75, recon=1.43e-03, size_dis=0.008, mean_size=0.11, max_size=10.19(575), time=3943.76
+epoch=770000, loss=1.96e-03, min_loss=1.59e-03, kld=16.55, recon=1.63e-03, size_dis=0.010, mean_size=0.11, max_size=5.20(996), time=3996.24
+epoch=780000, loss=1.70e-03, min_loss=1.61e-03, kld=14.70, recon=1.40e-03, size_dis=0.008, mean_size=0.10, max_size=5.07(996), time=4048.09
+epoch=790000, loss=1.64e-03, min_loss=1.59e-03, kld=14.35, recon=1.35e-03, size_dis=0.008, mean_size=0.11, max_size=5.15(828), time=4100.48
+epoch=800000, loss=1.63e-03, min_loss=1.60e-03, kld=14.35, recon=1.35e-03, size_dis=0.008, mean_size=0.11, max_size=6.61(321), time=4151.24
+
+18169, 35791, 2.40e-02, 3.44e-02, 6.28e-02, 2.20e-02, 2.89e-02, 5.14e-02
+
+epoch=810000, loss=1.63e-03, min_loss=1.60e-03, kld=14.30, recon=1.34e-03, size_dis=0.008, mean_size=0.11, max_size=6.15(321), time=4212.79
+epoch=820000, loss=1.64e-03, min_loss=1.59e-03, kld=14.33, recon=1.35e-03, size_dis=0.008, mean_size=0.11, max_size=7.11(828), time=4263.25
+epoch=830000, loss=1.62e-03, min_loss=1.59e-03, kld=14.28, recon=1.34e-03, size_dis=0.008, mean_size=0.11, max_size=5.92(321), time=4313.08
+epoch=840000, loss=1.62e-03, min_loss=1.59e-03, kld=14.08, recon=1.34e-03, size_dis=0.008, mean_size=0.10, max_size=5.84(321), time=4362.95
+epoch=850000, loss=1.62e-03, min_loss=1.58e-03, kld=14.28, recon=1.33e-03, size_dis=0.008, mean_size=0.11, max_size=5.90(321), time=4415.74
+epoch=860000, loss=1.60e-03, min_loss=1.58e-03, kld=14.08, recon=1.32e-03, size_dis=0.008, mean_size=0.11, max_size=9.89(828), time=4466.14
+epoch=870000, loss=1.60e-03, min_loss=1.58e-03, kld=14.06, recon=1.32e-03, size_dis=0.008, mean_size=0.12, max_size=9.86(828), time=4516.59
+epoch=880000, loss=1.61e-03, min_loss=1.58e-03, kld=14.02, recon=1.33e-03, size_dis=0.008, mean_size=0.11, max_size=5.57(321), time=4569.60
+epoch=890000, loss=1.70e-03, min_loss=1.55e-03, kld=14.56, recon=1.41e-03, size_dis=0.009, mean_size=0.12, max_size=13.74(998), time=4620.33
+epoch=900000, loss=1.62e-03, min_loss=1.59e-03, kld=14.47, recon=1.33e-03, size_dis=0.008, mean_size=0.11, max_size=5.84(321), time=4670.43
+
+15641, 35791, 2.35e-02, 3.27e-02, 6.20e-02, 2.31e-02, 3.14e-02, 5.13e-02
+
+epoch=910000, loss=1.62e-03, min_loss=1.58e-03, kld=14.49, recon=1.33e-03, size_dis=0.008, mean_size=0.11, max_size=8.62(998), time=4728.99
+epoch=920000, loss=1.57e-03, min_loss=1.57e-03, kld=14.18, recon=1.29e-03, size_dis=0.008, mean_size=0.11, max_size=6.82(321), time=4779.51
+epoch=930000, loss=1.60e-03, min_loss=1.57e-03, kld=14.40, recon=1.31e-03, size_dis=0.008, mean_size=0.11, max_size=6.33(321), time=4831.42
+epoch=940000, loss=1.61e-03, min_loss=1.56e-03, kld=14.24, recon=1.33e-03, size_dis=0.008, mean_size=0.11, max_size=5.30(996), time=4881.77
+epoch=950000, loss=1.63e-03, min_loss=1.56e-03, kld=14.60, recon=1.34e-03, size_dis=0.008, mean_size=0.10, max_size=4.45(321), time=4932.01
+epoch=960000, loss=1.63e-03, min_loss=1.59e-03, kld=14.57, recon=1.34e-03, size_dis=0.008, mean_size=0.11, max_size=5.00(340), time=4983.51
+epoch=970000, loss=1.67e-03, min_loss=1.58e-03, kld=14.34, recon=1.38e-03, size_dis=0.009, mean_size=0.11, max_size=7.05(340), time=5034.96
+epoch=980000, loss=1.79e-03, min_loss=1.59e-03, kld=15.53, recon=1.48e-03, size_dis=0.008, mean_size=0.11, max_size=4.04(321), time=5085.07
+epoch=990000, loss=1.68e-03, min_loss=1.62e-03, kld=14.47, recon=1.39e-03, size_dis=0.009, mean_size=0.10, max_size=4.47(321), time=5135.32
+epoch=1000000, loss=1.65e-03, min_loss=1.62e-03, kld=14.27, recon=1.36e-03, size_dis=0.008, mean_size=0.10, max_size=4.48(321), time=5186.21
+
+16033, 35791, 2.44e-02, 3.35e-02, 5.88e-02, 2.39e-02, 3.12e-02, 4.88e-02
+
