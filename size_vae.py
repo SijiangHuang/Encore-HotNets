@@ -181,7 +181,7 @@ if __name__ == "__main__":
             size_dis, mean_size_dis = model_test(encoder, decoder)
             cur_time = time.time()
             print("epoch=%d, loss=%.2e, min_loss=%.2e, kld=%.2f, recon=%.2e, size_dis=%.3f, mean_size=%.2f, max_size=%.2f(%d), time=%.2f" % (epoch, epoch_loss, min_epoch_loss, epoch_kld, epoch_recon, size_dis, np.mean(mean_size_dis), np.max(mean_size_dis), np.argmax(mean_size_dis), cur_time - start_time))
-            f.write("%d,%.2e,%.2e,%.2f,%.2e,%d\n" % (epoch, epoch_loss, min_epoch_loss, epoch_kld, epoch_recon,cur_time - start_time))
+            f.write("%d,%.2e,%.2e,%.2f,%.2e,%d\n" % (epoch, epoch_loss, min_epoch_loss, epoch_kld, epoch_recon, cur_time - start_time))
             sys.stdout.flush()
             f.flush()
             min_epoch_loss = 100
