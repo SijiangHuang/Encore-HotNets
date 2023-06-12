@@ -17,7 +17,7 @@ if __name__ == "__main__":
     os.chdir(sys.path[0])
 
     config_temp = "{config_dir}/config{config_id}_{trace}.txt"
-    config_dir = "data/config/encore_univ_0506/"
+    config_dir = "data/config/common_practice/"
 
     config_file = config_dir + 'all_configs.csv'
     configs = pd.read_csv(config_file)[:1000]
