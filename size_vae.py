@@ -3,6 +3,7 @@ import sys
 import pandas as pd
 import numpy as np
 import datetime  
+import argparse
 import time
 import torch
 from torch import nn, Tensor
@@ -139,14 +140,30 @@ def get_dis(decoder, latent_dim, sizedata, pairs):
 
 
 if __name__ == "__main__":
-    pairs = 1000
-    pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
+
+    parser = argparse.ArgumentParser()
+    help = "The name of dataset"
+    parser.add_argument('-d', dest = "dataset", required = True, help = help)
+    help = "The number of src-dst pairs"
+    parser.add_argument('-n', dest = "pairs", required = True, help = help)
+    args = parser.parse_args()
+    pairs = int(args.pairs)
+
+    if args.dataset == 'fb':
+        pairdata, freqpairs, n_size, n_interval = get_fb_data(pairs)
+        size_cdf = pd.read_csv('data/fb/size_cdf.csv')
+        kld_weight = 5e-5
+        lr = 1e-3
+
+    elif args.dataset == 'univ':
+        pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
+        size_cdf = pd.read_csv('data/univ/size_cdf.csv')
+        kld_weight = 2e-5
+        lr = 1e-3
+
     sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
-    size_cdf = pd.read_csv('data/univ/size_cdf.csv')
     size_cdf = np.concatenate(([0], (size_cdf['size'].values[1:] + size_cdf['size'].values[:-1]) / 2))
     mean_sizes = (sizedata * size_cdf).sum(axis=1)
-
-    kld_weight = 2e-5
     
     latent_dim = 32
     hidden_dims = [64, 128, 256, 128, 64]
@@ -158,12 +175,14 @@ if __name__ == "__main__":
     sys.stdout.flush()
 
     dataset = torch.tensor(sizedata, dtype=torch.float)
-    dataloader = DataLoader(dataset, batch_size=1000, shuffle=True)
-    lr = 1e-3
+    dataloader = DataLoader(dataset, batch_size=128, shuffle=True)
+    # lr = 1e-3
     optimizer = torch.optim.Adam([{'params': encoder.parameters()}, {'params': decoder.parameters()}], lr=lr)
+    step_size = 50000
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size, gamma=0.5)
 
     date = datetime.datetime.now()
-    date = 'univ-%s-%s-%s-%s' % (date.year, date.month, date.day, date.hour)
+    date = '%s-%s-%s-%s-%s' % (args.dataset, date.year, date.month, date.day, date.hour)
     if os.path.exists('model/{date}/'.format(date=date)):
         os.system('rm -r model/{date}/'.format(date=date))
     os.makedirs('model/{date}/'.format(date=date))
@@ -174,10 +193,10 @@ if __name__ == "__main__":
     decoder.train()
     start_time = time.time()
     min_epoch_loss = 100
-    for epoch in range(1000001):
+    for epoch in range(200001):
         epoch_loss, epoch_recon, epoch_kld = train(encoder, decoder, dataloader, optimizer)
         min_epoch_loss = min(epoch_loss, min_epoch_loss)
-        if epoch % 10000 == 0:
+        if epoch and epoch % 100 == 0:
             size_dis, mean_size_dis = model_test(encoder, decoder)
             cur_time = time.time()
             print("epoch=%d, loss=%.2e, min_loss=%.2e, kld=%.2f, recon=%.2e, size_dis=%.3f, mean_size=%.2f, max_size=%.2f(%d), time=%.2f" % (epoch, epoch_loss, min_epoch_loss, epoch_kld, epoch_recon, size_dis, np.mean(mean_size_dis), np.max(mean_size_dis), np.argmax(mean_size_dis), cur_time - start_time))
@@ -186,9 +205,14 @@ if __name__ == "__main__":
             f.flush()
             min_epoch_loss = 100
 
-        if epoch % 100000 == 0:
-            size_dis, pred_mean_sizes = get_dis(decoder, latent_dim, sizedata[:1000], 1000)
-            print("\n%d, %d, %.2e, %.2e, %.2e, %.2e, %.2e, %.2e\n" % (np.mean(pred_mean_sizes), np.mean(mean_sizes), np.sort(np.min(size_dis, axis=0))[-100], np.sort(np.min(size_dis, axis=0))[-50], np.sort(np.min(size_dis, axis=0))[-10], np.sort(np.min(size_dis, axis=1))[-100], np.sort(np.min(size_dis, axis=1))[-50], np.sort(np.min(size_dis, axis=1))[-10]))
+        if epoch and epoch % 1000 == 0:
+            size_dis, pred_mean_sizes = get_dis(decoder, latent_dim, sizedata, pairs)
+            accuracy = np.min(size_dis, axis=1)
+            coverage = np.min(size_dis, axis=0)
+            acc_percentile = np.percentile(accuracy, [90, 95, 99])
+            cov_percentile = np.percentile(coverage, [90, 95, 99])
+            print("\n%d, %d, acc=%.2e, %.2e, %.2e, cov=%.2e, %.2e, %.2e\n" % (np.mean(pred_mean_sizes), np.mean(mean_sizes), acc_percentile[0], acc_percentile[1], acc_percentile[2], cov_percentile[0], cov_percentile[1], cov_percentile[2]))
+            sys.stdout.flush()
         
             torch.save(encoder, 'model/{date}/encoder-{i}.pth'.format(i=epoch, date=date))
             torch.save(decoder, 'model/{date}/decoder-{i}.pth'.format(i=epoch, date=date))
@@ -197,8 +221,13 @@ if __name__ == "__main__":
             size_dis, mean_size_dis = model_test(encoder, decoder)
             print("epoch=%d, loss=%.2e, min_loss=%.2e, kld=%.2f, recon=%.2e, size_dis=%.3f, mean_size=%.2f, max_size=%.2f(%d), time=%.2f" % (epoch, epoch_loss, min_epoch_loss, epoch_kld, epoch_recon, size_dis, np.mean(mean_size_dis), np.max(mean_size_dis), np.argmax(mean_size_dis), cur_time - start_time))
 
-            size_dis, pred_mean_sizes = get_dis(decoder, latent_dim, sizedata[:1000], 1000)
-            print("%d, %d, %.2e, %.2e, %.2e, %.2e, %.2e, %.2e" % (np.mean(pred_mean_sizes), np.mean(mean_sizes), np.sort(np.min(size_dis, axis=0))[-100], np.sort(np.min(size_dis, axis=0))[-50], np.sort(np.min(size_dis, axis=0))[-10], np.sort(np.min(size_dis, axis=1))[-100], np.sort(np.min(size_dis, axis=1))[-50], np.sort(np.min(size_dis, axis=1))[-10]))
+            size_dis, pred_mean_sizes = get_dis(decoder, latent_dim, sizedata, pairs)
+            accuracy = np.min(size_dis, axis=1)
+            coverage = np.min(size_dis, axis=0)
+            acc_percentile = np.percentile(accuracy, [90, 95, 99])
+            cov_percentile = np.percentile(coverage, [90, 95, 99])
+            print("\n%d, %d, acc=%.2e, %.2e, %.2e, cov=%.2e, %.2e, %.2e\n" % (np.mean(pred_mean_sizes), np.mean(mean_sizes), acc_percentile[0], acc_percentile[1], acc_percentile[2], cov_percentile[0], cov_percentile[1], cov_percentile[2]))
+
             sys.stdout.flush()
             torch.save(encoder, 'model/{date}/encoder-final.pth'.format(date=date))
             torch.save(decoder, 'model/{date}/decoder-final.pth'.format(date=date))

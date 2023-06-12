@@ -90,9 +90,14 @@ def train(s2h, gru, dataloader, optimizer):
     return sum_loss / len(dataloader.dataset)
 
 if __name__ == "__main__":
-    pairs = 1000
+    # pairs = 1000
+    # seq_len = 16
+    # pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
+    # sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
+
+    pairs = 5000
     seq_len = 16
-    pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
+    pairdata, freqpairs, n_size, n_interval = get_fb_data(pairs)
     sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
 
     seq_set = defaultdict(list)
@@ -115,19 +120,22 @@ if __name__ == "__main__":
 
     lr = 1e-3
     optimizer = torch.optim.Adam([{'params': gru.parameters()}, {'params': s2h.parameters()}], lr=lr)
+    step_size = 10000
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size, gamma=0.5)
+
 
     date = datetime.datetime.now()
-    date = 'gru-%s-%s-%s-%s' % (date.year, date.month, date.day, date.hour)
+    date = 'fb-gru-%s-%s-%s-%s' % (date.year, date.month, date.day, date.hour)
     if os.path.exists('model/{date}/'.format(date=date)):
         os.system('rm -r model/{date}/'.format(date=date))
     os.makedirs('model/{date}/'.format(date=date))
 
-    stop_loss = 0.1
+    stop_loss = 0.2
     s_time = time.time()
     plot_every = 100
     save_every = 1000
     avg_loss = 0
-    for i in range(1000001):
+    for i in range(100001):
         dataset = sample_dataset(i)
         dataloader = DataLoader(dataset, batch_size=1000, shuffle=True)
         loss = train(s2h, gru, dataloader, optimizer)
