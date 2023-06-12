@@ -1,0 +1,4 @@
+mix/
+*.pyc
+build/
+.waf*
