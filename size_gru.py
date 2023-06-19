@@ -95,9 +95,9 @@ if __name__ == "__main__":
     # pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
     # sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
 
-    pairs = 5000
+    pairs = 1000
     seq_len = 16
-    pairdata, freqpairs, n_size, n_interval = get_fb_data(pairs)
+    pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
     sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
 
     seq_set = defaultdict(list)
@@ -114,18 +114,17 @@ if __name__ == "__main__":
         seq_set[pair] = np.array(seq_set[pair])
         target_set[pair] = np.array(target_set[pair])
     
-    hidden_size = 1024
+    hidden_size = 512
     gru = GRU(n_size, hidden_size, 1).to(device)
-    s2h = SizeToHidden(n_size, [64, 128, 256, 512], hidden_size, 1).to(device)
+    s2h = SizeToHidden(n_size, [128, 256], hidden_size, 1).to(device)
 
     lr = 1e-3
     optimizer = torch.optim.Adam([{'params': gru.parameters()}, {'params': s2h.parameters()}], lr=lr)
-    step_size = 10000
+    step_size = 20000
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size, gamma=0.5)
 
-
     date = datetime.datetime.now()
-    date = 'fb-gru-%s-%s-%s-%s' % (date.year, date.month, date.day, date.hour)
+    date = 'univ-gru-%s-%s-%s-%s' % (date.year, date.month, date.day, date.hour)
     if os.path.exists('model/{date}/'.format(date=date)):
         os.system('rm -r model/{date}/'.format(date=date))
     os.makedirs('model/{date}/'.format(date=date))
@@ -137,7 +136,7 @@ if __name__ == "__main__":
     avg_loss = 0
     for i in range(100001):
         dataset = sample_dataset(i)
-        dataloader = DataLoader(dataset, batch_size=1000, shuffle=True)
+        dataloader = DataLoader(dataset, batch_size=128, shuffle=True)
         loss = train(s2h, gru, dataloader, optimizer)
         avg_loss += loss
 

@@ -140,7 +140,6 @@ def get_dis(decoder, latent_dim, sizedata, pairs):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     help = "The name of dataset"
     parser.add_argument('-d', dest = "dataset", required = True, help = help)
@@ -158,15 +157,17 @@ if __name__ == "__main__":
     elif args.dataset == 'univ':
         pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
         size_cdf = pd.read_csv('data/univ/size_cdf.csv')
-        kld_weight = 2e-5
+        kld_weight = 5e-5
         lr = 1e-3
 
     sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
     size_cdf = np.concatenate(([0], (size_cdf['size'].values[1:] + size_cdf['size'].values[:-1]) / 2))
     mean_sizes = (sizedata * size_cdf).sum(axis=1)
     
-    latent_dim = 32
-    hidden_dims = [64, 128, 256, 128, 64]
+    # latent_dim = 32
+    # hidden_dims = [64, 128, 256, 128, 64]
+    latent_dim = 16
+    hidden_dims = [28, 24, 20]
     encoder = SizeEncoder(n_size, hidden_dims, latent_dim).to(device)
     hidden_dims.reverse()
     decoder = SizeDecoder(n_size, hidden_dims, latent_dim).to(device)
@@ -175,10 +176,10 @@ if __name__ == "__main__":
     sys.stdout.flush()
 
     dataset = torch.tensor(sizedata, dtype=torch.float)
-    dataloader = DataLoader(dataset, batch_size=128, shuffle=True)
+    # dataloader = DataLoader(dataset, batch_size=128, shuffle=True)
     # lr = 1e-3
     optimizer = torch.optim.Adam([{'params': encoder.parameters()}, {'params': decoder.parameters()}], lr=lr)
-    step_size = 50000
+    step_size = 20000
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size, gamma=0.5)
 
     date = datetime.datetime.now()
@@ -193,7 +194,8 @@ if __name__ == "__main__":
     decoder.train()
     start_time = time.time()
     min_epoch_loss = 100
-    for epoch in range(200001):
+    for epoch in range(100001):
+        dataloader = DataLoader(dataset, batch_size=128, shuffle=True)
         epoch_loss, epoch_recon, epoch_kld = train(encoder, decoder, dataloader, optimizer)
         min_epoch_loss = min(epoch_loss, min_epoch_loss)
         if epoch and epoch % 100 == 0:
