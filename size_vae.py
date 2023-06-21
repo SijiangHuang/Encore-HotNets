@@ -157,7 +157,7 @@ if __name__ == "__main__":
     elif args.dataset == 'univ':
         pairdata, freqpairs, n_size, n_interval = get_univ_data(pairs)
         size_cdf = pd.read_csv('data/univ/size_cdf.csv')
-        kld_weight = 5e-5
+        kld_weight = 2.5e-5
         lr = 1e-3
 
     sizedata = get_data(pairdata, freqpairs, 'size_index', n_size)
