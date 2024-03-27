@@ -168,7 +168,7 @@ if __name__ == "__main__":
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10000, gamma=0.9)
 
     # train model
-    max_epoch = 100001
+    max_epoch = 50001
     test_every = 1000
     s_time = time.time()
     min_loss = 1e10

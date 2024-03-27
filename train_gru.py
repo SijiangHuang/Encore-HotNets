@@ -98,7 +98,7 @@ def get_data_loader(trainset, subset_size, batch_size, seed):
 
 def train_model(model, lr, plot_every, max_epoch, subset_size=100000, stop_loss=0.2):
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20000, gamma=0.9)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50000, gamma=0.9)
     s_time = time.time()
     avg_loss = 0
     train_loader = get_data_loader(trainset, subset_size, batch_size, seed=0)
@@ -151,7 +151,7 @@ if __name__ == "__main__":
         'hidden_dims': [128, 256]
     }
     model = Model(gru_params, s2h_params).to(device)
-    train_model(model, lr=1e-3, plot_every=10000, max_epoch=1000001, subset_size=50000, stop_loss=0.2)
+    train_model(model, lr=5e-4, plot_every=10000, max_epoch=1000001, subset_size=50000, stop_loss=0.2)
     ckpt = {
         'model': model.state_dict(),
         'gru_params': gru_params,

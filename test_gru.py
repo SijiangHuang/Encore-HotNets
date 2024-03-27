@@ -117,10 +117,9 @@ def compute_jsds(model, sequences, block_size, input_size, device, seq_len=1000,
         # Generate sequence using model, retry if JSD is too high
         current_seed = seed
         seq_generated, jsd = generate_sequence(seq_padded, model, block_size, input_size, device, seq_len, current_seed)
-        # while jsd > 0.05:
-        #     print(jsd)
-        #     current_seed += 1
-        #     seq_generated, jsd = generate_sequence(seq_padded, model, block_size, input_size, device, seq_len, current_seed)
+        while jsd > 0.05:
+            current_seed += 1
+            seq_generated, jsd = generate_sequence(seq_padded, model, block_size, input_size, device, seq_len, current_seed)
         
         # Compute n-gram distributions and JSDs
         for n in [2, 3, 4]:
@@ -148,7 +147,7 @@ if __name__ == "__main__":
     block_size = 16
     data = get_data(size_file)
 
-    ckpt = torch.load('model/univ-gru-2024-3-27-14.pt')
+    ckpt = torch.load('model/univ-gru-2024-3-27-17.pt')
     gru_params = ckpt['gru_params']
     s2h_params = ckpt['s2h_params']
     model = Model(gru_params, s2h_params).to(device)
