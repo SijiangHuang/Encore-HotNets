@@ -1,3 +1,4 @@
 model
 figure
-simulation/data
+logs
+results
